@@ -1,0 +1,14 @@
+{
+    "collection": "User",
+    "database": "todo",
+    "roles": [
+        {
+            "name": "role 1",
+            "apply_when": {},
+            "insert": true,
+            "delete": true,
+            "search": true,
+            "additional_fields": {}
+        }
+    ]
+}

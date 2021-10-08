@@ -1,0 +1,48 @@
+{
+    "bsonType": "object",
+    "properties": {
+        "_id": {
+            "bsonType": "objectId"
+        },
+        "_partition": {
+            "bsonType": "string"
+        },
+        "displayName": {
+            "bsonType": "string"
+        },
+        "email": {
+            "bsonType": "string"
+        },
+        "firstName": {
+            "bsonType": "string"
+        },
+        "lastName": {
+            "bsonType": "string"
+        },
+        "mobile": {
+            "bsonType": "string"
+        },
+        "role": {
+            "bsonType": "string"
+        },
+        "status": {
+            "bsonType": "string"
+        },
+        "userName": {
+            "bsonType": "string"
+        }
+    },
+    "required": [
+        "_id",
+        "_partition",
+        "userName",
+        "email",
+        "mobile",
+        "role",
+        "firstName",
+        "lastName",
+        "displayName",
+        "status"
+    ],
+    "title": "User"
+}

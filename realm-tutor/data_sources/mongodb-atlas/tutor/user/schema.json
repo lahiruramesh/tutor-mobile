@@ -1,0 +1,33 @@
+{
+    "bsonType": "object",
+    "properties": {
+        "_id": {
+            "bsonType": "objectId"
+        },
+        "_partition": {
+            "bsonType": "string"
+        },
+        "email": {
+            "bsonType": "string"
+        },
+        "mobile": {
+            "bsonType": "string"
+        },
+        "role": {
+            "bsonType": "string"
+        },
+        "status": {
+            "bsonType": "string"
+        },
+        "userName": {
+            "bsonType": "boolean"
+        }
+    },
+    "required": [
+        "_id",
+        "userName",
+        "email",
+        "_partition"
+    ],
+    "title": "user"
+}

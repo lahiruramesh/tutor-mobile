@@ -1,0 +1,23 @@
+{
+    "state": "enabled",
+    "database_name": "todo",
+    "partition": {
+        "key": "_partition",
+        "type": "string",
+        "required": true,
+        "permissions": {
+            "read": {
+                "%%partition": "%%user.id"
+            },
+            "write": {
+                "$or": {
+                    "%%partition": "61598e2c5d53028f7c7921c5"
+                },
+                "%%partition": "%%user.id"
+            }
+        }
+    },
+    "last_disabled": 1633280979,
+    "development_mode_enabled": true,
+    "service_name": "mongodb-atlas"
+}

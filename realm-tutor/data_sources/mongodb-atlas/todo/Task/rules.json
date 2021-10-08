@@ -1,0 +1,21 @@
+{
+    "collection": "Task",
+    "database": "todo",
+    "filters": [
+        {
+            "name": "filter 1",
+            "query": {},
+            "apply_when": {}
+        }
+    ],
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "insert": true,
+            "delete": true,
+            "search": true,
+            "additional_fields": {}
+        }
+    ]
+}
