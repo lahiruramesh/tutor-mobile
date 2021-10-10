@@ -3,7 +3,7 @@ import {View, Text, Button} from 'react-native';
 import useAuthReducer from '../../context/AuthContext/AuthReducer';
 import ProfileView from '../../components/ProfileView';
 import {NativeBaseProvider} from 'native-base/src/core/NativeBaseProvider';
-import {Center, ScrollView} from 'native-base';
+import {ScrollView} from 'native-base';
 
 export default function Profile() {
   const {

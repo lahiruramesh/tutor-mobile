@@ -17,10 +17,10 @@
             "bsonType": "string"
         },
         "status": {
-            "bsonType": "string"
+            "bsonType": "boolean"
         },
         "userName": {
-            "bsonType": "boolean"
+            "bsonType": "string"
         }
     },
     "required": [

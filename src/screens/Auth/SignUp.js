@@ -1,10 +1,10 @@
 import React from 'react';
-import {NativeBaseProvider} from 'native-base';
-import SignInForm from './SignInForm';
+import {NativeBaseProvider, View} from 'native-base';
+import SignUpForm from './SignUpForm';
 export default function SignIn() {
   return (
     <NativeBaseProvider>
-      <SignInForm />
+      <SignUpForm />
     </NativeBaseProvider>
   );
 }

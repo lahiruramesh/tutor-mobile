@@ -1,42 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Box,
-  Text,
-  Heading,
-  VStack,
+  Button,
+  Center,
   FormControl,
+  Heading,
+  HStack,
   Input,
   Link,
-  Button,
-  HStack,
-  Center,
+  Text,
+  VStack,
 } from 'native-base';
 import LogoContainer from '../../components/LogoContainer';
-import useAuthReducer from '../../context/AuthContext/AuthReducer';
 import TouchableItem from 'native-base/src/components/primitives/TouchableItem/index';
-import {useNavigation} from '@react-navigation/native';
 
-export default function SignInForm() {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const navigation = useNavigation();
-  const {
-    state,
-    methods: {signIn},
-  } = useAuthReducer();
-
-  const onPressSignInHandler = async () => {
-    await signIn(userName, password);
-  };
-
-  const onPressSignUpHandler = () => {
-    navigation.navigate('SignUp');
-  };
-
-  const onPressResetPasswordHandler = () => {
-    navigation.navigate('ResetPassword');
-  };
-
+export default function PasswordResetForm() {
   return (
     <Box
       safeArea
@@ -46,23 +24,13 @@ export default function SignInForm() {
       py="20"
       w="100%"
       mx="auto">
-      <Center>
-        <LogoContainer key="logoContainer" />
-        <Heading size="lg" fontWeight="600" color="coolGray.800">
-          Welcome
-        </Heading>
-        <Heading mt="1" color="coolGray.600" fontWeight="medium" size="xs">
-          Sign in to continue!
-        </Heading>
-      </Center>
-
       <VStack space={3} mt="5">
         <FormControl>
           <FormControl.Label>User Name</FormControl.Label>
           <Input
             type="text"
             key="userName"
-            onChangeText={setUserName}
+            //   onChangeText={setUserName}
             fontSize="md"
           />
         </FormControl>
@@ -70,8 +38,8 @@ export default function SignInForm() {
           <FormControl.Label>Password</FormControl.Label>
           <Input
             type="password"
-            onChangeText={setPassword}
-            value={password}
+            //     onChangeText={setPassword}
+            //      value={password}
             key="password"
             fontSize="md"
           />
@@ -80,14 +48,15 @@ export default function SignInForm() {
               _text={{fontSize: 'sm', fontWeight: '500', color: 'indigo.500'}}
               alignSelf="flex-end"
               mt="1"
-              onPress={onPressResetPasswordHandler}>
+              //  onPress={onPressResetPasswordHandler}
+            >
               Forget Password?
             </Link>
           </TouchableItem>
         </FormControl>
         <Button
           key="btSignIn"
-          onPress={onPressSignInHandler}
+          //      onPress={onPressSignInHandler}
           mt="2"
           colorScheme="indigo"
           _text={{color: 'white'}}>
@@ -104,7 +73,8 @@ export default function SignInForm() {
                 fontWeight: 'medium',
                 fontSize: 'sm',
               }}
-              onPress={onPressSignUpHandler}>
+              // onPress={onPressSignUpHandler}
+            >
               Sign Up
             </Link>
           </TouchableItem>

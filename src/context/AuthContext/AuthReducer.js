@@ -4,7 +4,7 @@ import {SESSION_STORE} from '../../constants/AuthConstants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Realm from 'realm';
 import {User} from '../../models/User';
-import {ObjectId} from 'bson';
+import {v4 as uuid} from 'uuid';
 
 export const ACTIONS = {
   SET_DATA: 'set_data',
@@ -59,20 +59,32 @@ export default function useAuthReducer() {
         token: 'TEST_TOKEN',
         role: username === 'Student' ? 'Student' : 'Tutor',
       };
-      const app = new Realm.App({
-        id: 'tutor-jktla',
-        app: {name: 'tutor', version: '0'},
-      });
-      const credentials = Realm.Credentials.emailPassword(
-        'lahiru@gmail.com',
-        'lahiru123',
-      );
-      console.log('credentials', credentials);
-      const user = await app.logIn(credentials);
-      console.log('User', user.id);
-      await openRealm(user, app);
-      await AsyncStorage.setItem(SESSION_STORE, JSON.stringify(sessionData));
-      dispatch({type: ACTIONS.SIGN_IN_SUCCESS, payload: sessionData});
+      // const app = new Realm.App({
+      //   id: 'tutor-wecja',
+      //   app: {name: 'tutor', version: '0'},
+      // });
+      // const credentials = Realm.Credentials.emailPassword(
+      //   'lahiru@gmail.com',
+      //   'lahiru123',
+      // );
+      // console.log('credentials', credentials);
+      // const user = await app.logIn(credentials);
+      // console.log('User', user.id);
+      const user = {id: 'testing'};
+      const config = {
+        schema: [User],
+        schemaVersion: 1,
+      };
+      const realm = new Realm(config);
+      await openRealm(user, realm);
+      const users = realm.objects('User');
+      console.log('users');
+      const students = users.filtered('userName == "Fidoss"');
+      console.log('userssss', typeof students[0]);
+      if (users) {
+        await AsyncStorage.setItem(SESSION_STORE, JSON.stringify(sessionData));
+        dispatch({type: ACTIONS.SIGN_IN_SUCCESS, payload: sessionData});
+      }
     } catch (e) {
       console.log('error', e);
       dispatch({type: ACTIONS.SIGN_IN_FAILURE, payload: e.message});
@@ -93,29 +105,29 @@ export default function useAuthReducer() {
   return {state, dispatch, methods: {signIn, signOut}};
 }
 
-const openRealm = async (user, app) => {
+const openRealm = async (user, realm) => {
   console.log('user', user.id);
-  let realm;
   try {
-    const config = {
-      schema: [User.schema],
-      sync: {
-        user: user,
-        partitionValue: user.id,
-      },
-    };
-    realm = await Realm.open(config);
-    realm.write(() => {
-      realm.create('user', {
-        _id: new ObjectId(),
-        userName: 'Fido',
+    let user1;
+    let id = uuid();
+    await realm.write(async () => {
+      user1 = await realm.create('User', {
+        _id: id,
+        userName: 'Fidoss1',
+        city: 'Matara',
+        firstName: 'Lahiru',
+        lastName: 'Ramesh',
+        displayName: 'testing',
         email: 'testing@gmail.com',
-        partition: user.id,
+        _partition: user.id,
+        mobile: '0768282452',
+        role: 'Student',
+        status: User.STATUS_ACTIVE,
       });
     });
-    const dogs = realm.objects('User');
-    console.log('sss', dogs);
   } catch (error) {
-    console.log('errorOpenRealm', error);
+    console.log('errorOpenRealm', error.message);
+  } finally {
+    // realm.close();
   }
 };

@@ -9,7 +9,7 @@ export default function getRealmApp() {
       id: appId,
       timeout: 10000,
       app: {
-        name: 'default',
+        name: 'tutor',
         version: '0',
       },
     };

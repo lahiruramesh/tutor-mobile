@@ -1,10 +1,10 @@
 import React from 'react';
 import {NativeBaseProvider} from 'native-base';
-import SignInForm from './SignInForm';
+import PasswordResetForm from './PasswordResetForm';
 export default function SignIn() {
   return (
     <NativeBaseProvider>
-      <SignInForm />
+      <PasswordResetForm />
     </NativeBaseProvider>
   );
 }

@@ -6,18 +6,12 @@
         "type": "string",
         "required": true,
         "permissions": {
-            "read": {
-                "%%partition": "%%user.id"
-            },
-            "write": {
-                "$or": {
-                    "%%partition": "61598e2c5d53028f7c7921c5"
-                },
-                "%%partition": "%%user.id"
-            }
+            "read": true,
+            "write": true
         }
     },
     "last_disabled": 1633280979,
+    "client_max_offline_days": 30,
     "development_mode_enabled": true,
     "service_name": "mongodb-atlas"
 }
