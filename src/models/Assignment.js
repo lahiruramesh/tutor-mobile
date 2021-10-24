@@ -1,9 +1,9 @@
-class Course {
+class Assignment {
   static STATUS_ACTIVE = 1;
   static STATUS_INACTIVE = 0;
 
   static schema = {
-    name: 'Course',
+    name: 'Assignment',
     properties: {
       _id: 'string',
       _partition: 'string',
@@ -15,4 +15,4 @@ class Course {
     primaryKey: '_id',
   };
 }
-export {Course};
+export {Assignment};

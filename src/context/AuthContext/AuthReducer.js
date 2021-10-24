@@ -6,12 +6,17 @@ import Realm from 'realm';
 import {User} from '../../models/User';
 import {v4 as uuid} from 'uuid';
 import getRealmApp from '../../config/realm';
+import saveUser, {getUser} from '../../repositories/UserRepository';
 
 export const ACTIONS = {
   SET_DATA: 'set_data',
   SIGN_IN_REQUEST: 'signIn_request',
   SIGN_IN_SUCCESS: 'signIn_success',
   SIGN_IN_FAILURE: 'signIn_failure',
+
+  SIGN_UP_REQUEST: 'signUp_request',
+  SIGN_UP_SUCCESS: 'signUp_success',
+  SIGN_UP_FAILURE: 'signUp_failure',
 
   SIGN_OUT_REQUEST: 'signOut_request',
   SIGN_OUT_SUCCESS: 'signOut_success',
@@ -44,6 +49,12 @@ export function AuthReducer(state, action) {
       return {...state, ...action.payload, loading: true};
     case ACTIONS.SIGN_IN_FAILURE:
       return {...state, ...action.payload, loading: false};
+    case ACTIONS.SIGN_UP_REQUEST:
+      return {...state, loading: true};
+    case ACTIONS.SIGN_UP_SUCCESS:
+      return {...state, ...action.payload, loading: true};
+    case ACTIONS.SIGN_UP_FAILURE:
+      return {...state, ...action.payload, loading: false};
     default:
       return initialState;
   }
@@ -51,45 +62,48 @@ export function AuthReducer(state, action) {
 export default function useAuthReducer() {
   const {state, dispatch} = useAuthContext();
 
-  const signIn = async ({username, password}) => {
+  const signIn = async (username, password) => {
     try {
       dispatch({type: ACTIONS.SIGN_IN_REQUEST});
 
       const sessionData = {
-        username: username,
+        username: username.toLowerCase(),
+        password: password,
         token: 'TEST_TOKEN',
-        role: username === 'Student' ? 'Student' : 'Tutor',
+        role: username === 'lahiru@test.com' ? 'Student' : 'Tutor',
       };
-      getRealmApp();
-      // const app = new Realm.App({
-      //   id: 'tutor-wecja',
-      //   app: {name: 'tutor', version: '0'},
-      // });
-      // const credentials = Realm.Credentials.emailPassword(
-      //   'lahiru@gmail.com',
-      //   'lahiru123',
-      // );
-      // console.log('credentials', credentials);
-      // const user = await app.logIn(credentials);
-      // console.log('User', user.id);
-      const user = {id: 'testing'};
-      const config = {
-        schema: [User],
-        schemaVersion: 1,
-      };
-      const realm = new Realm(config);
-      await openRealm(user, realm);
-      const users = realm.objects('User');
-      console.log('users');
-      const students = users.filtered('userName == "Fidoss"');
-      console.log('userssss', typeof students[0]);
-      if (users) {
-        await AsyncStorage.setItem(SESSION_STORE, JSON.stringify(sessionData));
+
+      const user = await getUser(username);
+      if (user) {
         dispatch({type: ACTIONS.SIGN_IN_SUCCESS, payload: sessionData});
       }
+      dispatch({type: ACTIONS.SIGN_IN_SUCCESS, payload: sessionData});
     } catch (e) {
       console.log('error', e);
       dispatch({type: ACTIONS.SIGN_IN_FAILURE, payload: e.message});
+    }
+  };
+
+  const signUp = async form => {
+    try {
+      console.log('form', form);
+      dispatch({type: ACTIONS.SIGN_UP_REQUEST});
+      const user = await saveUser(form);
+      if (user) {
+        return dispatch({
+          type: ACTIONS.SIGN_UP_SUCCESS,
+          payload: {message: 'Success', success: true},
+        });
+      }
+      dispatch({
+        type: ACTIONS.SIGN_UP_FAILURE,
+        payload: {
+          message: 'Failed',
+          success: false,
+        },
+      });
+    } catch (e) {
+      dispatch({type: ACTIONS.SIGN_UP_FAILURE, payload: e.message});
     }
   };
 
@@ -104,32 +118,5 @@ export default function useAuthReducer() {
     }
   };
 
-  return {state, dispatch, methods: {signIn, signOut}};
+  return {state, dispatch, methods: {signIn, signOut, signUp}};
 }
-
-const openRealm = async (user, realm) => {
-  console.log('user', user.id);
-  try {
-    let user1;
-    let id = uuid();
-    await realm.write(async () => {
-      user1 = await realm.create('User', {
-        _id: id,
-        userName: 'Fidoss1',
-        city: 'Matara',
-        firstName: 'Lahiru',
-        lastName: 'Ramesh',
-        displayName: 'testing',
-        email: 'testing@gmail.com',
-        _partition: user.id,
-        mobile: '0768282452',
-        role: 'Student',
-        status: User.STATUS_ACTIVE,
-      });
-    });
-  } catch (error) {
-    console.log('errorOpenRealm', error.message);
-  } finally {
-    // realm.close();
-  }
-};

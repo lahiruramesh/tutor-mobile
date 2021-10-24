@@ -36,13 +36,13 @@ export default function Course() {
           bottom={0}
           px="3"
           py="1.5">
-          PHOTOS
+          VIDEOS
         </Center>
       </Box>
       <Stack p="4" space={3}>
         <Stack space={2}>
           <Heading size="md" ml="-1">
-            The Garden City
+            OL
           </Heading>
           <Text
             fontSize="xs"
@@ -51,17 +51,14 @@ export default function Course() {
             fontWeight="500"
             ml="-0.5"
             mt="-1">
-            The Silicon Valley of India.
+            Grade 12
           </Text>
         </Stack>
-        <Text fontWeight="400">
-          Bengaluru (also called Bangalore) is the center of India's high-tech
-          industry. The city is also known for its parks and nightlife.
-        </Text>
+        <Text fontWeight="400">Grade 12 Maths Vectors</Text>
         <HStack alignItems="center" space={4} justifyContent="space-between">
           <HStack alignItems="center">
             <Text color="gray.500" fontWeight="400">
-              6 mins ago
+              2021/10/18
             </Text>
           </HStack>
         </HStack>

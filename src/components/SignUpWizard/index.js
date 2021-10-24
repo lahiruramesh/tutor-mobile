@@ -3,12 +3,13 @@ import TakeSelfie from './TakeSelfie';
 import SelectRole from './SelectRole';
 import BasicInformation from './BasicInformation';
 import EducationalBackground from './EducationalBackground';
+import {User} from '../../models/User';
 
 export default function SignUPWizard({
   step,
   selectedRole,
   submitBasicFormDetails,
-  takeSelfie,
+  submitSelfie,
   submitEducationalBackground,
 }) {
   switch (step) {
@@ -19,13 +20,14 @@ export default function SignUPWizard({
         <BasicInformation submitBasicFormDetails={submitBasicFormDetails} />
       );
     case 3:
-      return <TakeSelfie takeSelfie={takeSelfie} />;
+      return <TakeSelfie submitSelfie={submitSelfie} />;
     case 4:
       return (
         <EducationalBackground
           submitEducationalBackground={submitEducationalBackground}
         />
       );
+
     default:
       return <SelectRole selectedRoleHandler={selectedRole} />;
   }

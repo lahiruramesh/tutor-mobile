@@ -4,21 +4,38 @@ import useAuthReducer from '../../context/AuthContext/AuthReducer';
 import {useNavigation} from '@react-navigation/native';
 import {User} from '../../models/User';
 import SignUPWizard from '../../components/SignUpWizard';
+import * as Alert from 'react-native';
 
 export default function SignUpForm() {
   const [step, SetStep] = useState(1);
   const [role, SetRole] = useState(User.ROLE_STUDENT);
+  const [selfie, SetSelfie] = useState({});
+  const [education, SetEducation] = useState({});
   const [basicForm, SetBasicForm] = useState({});
   const navigation = useNavigation();
   const {
     state,
-    methods: {signIn},
+    methods: {signUp},
   } = useAuthReducer();
 
   const onNextWizardHandler = () => {
     if (step > 3) {
-      alert('Finish');
-      return;
+      console.log('e', selfie);
+      const signUpForm = {
+        role,
+        ...basicForm,
+        selfie: selfie.uri,
+        ...education,
+      };
+      signUp(signUpForm)
+        .then(response => {
+          console.log('response', response);
+          navigation.navigate('SignIn');
+        })
+        .catch(e => {
+          console.log('error', e);
+          Alert.alert(e.message);
+        });
     }
     SetStep(step + 1);
   };
@@ -41,6 +58,12 @@ export default function SignUpForm() {
 
   const submitEducationalBackground = form => {
     console.log('form', form);
+    SetEducation(form);
+  };
+
+  const submitSelfie = selfie => {
+    console.log('selfie', selfie);
+    SetSelfie(selfie);
   };
 
   useEffect(() => {}, []);
@@ -56,6 +79,7 @@ export default function SignUpForm() {
       <SignUPWizard
         step={step}
         selectedRole={selectedRole}
+        submitSelfie={submitSelfie}
         submitBasicFormDetails={submitBasicFormDetails}
         submitEducationalBackground={submitEducationalBackground}
       />

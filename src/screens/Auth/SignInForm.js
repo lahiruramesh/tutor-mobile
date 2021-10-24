@@ -26,6 +26,8 @@ export default function SignInForm() {
   } = useAuthReducer();
 
   const onPressSignInHandler = async () => {
+    console.log('userName', userName);
+    console.log('password', password);
     await signIn(userName, password);
   };
 

@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 import CameraContainer from '../CameraContainer';
 
-export default function TakeSelfie() {
+export default function TakeSelfie({submitSelfie}) {
   const [uploadPath, SetUploadPath] = useState('');
   const [showModal, SetShowModal] = useState(false);
 
@@ -26,6 +26,7 @@ export default function TakeSelfie() {
     }
     SetUploadPath(source);
     SetShowModal(false);
+    submitSelfie(source);
   };
 
   const openCameraHandler = () => {
@@ -54,6 +55,7 @@ export default function TakeSelfie() {
         };
         console.log('imageResponse', source);
         SetUploadPath(source);
+        submitSelfie(source);
       }
     });
   };

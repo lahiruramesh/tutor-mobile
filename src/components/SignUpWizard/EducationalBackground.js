@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {FormControl, Heading, Input, VStack} from 'native-base';
+import {FormControl, Heading, Input, TextArea, VStack} from 'native-base';
 
 export default function EducationalBackground({submitEducationalBackground}) {
   const [educationalInfoForm, setFormData] = useState();
@@ -16,66 +16,32 @@ export default function EducationalBackground({submitEducationalBackground}) {
 
       <VStack space={3} mt="5">
         <FormControl isRequired>
-          <FormControl.Label>First Name</FormControl.Label>
+          <FormControl.Label>School Name</FormControl.Label>
           <Input
             type="text"
-            key="firstName"
+            key="schoolName"
             onChangeText={value =>
-              setFormData({...educationalInfoForm, firstName: value})
+              setFormData({...educationalInfoForm, schoolName: value})
             }
             fontSize="md"
           />
         </FormControl>
         <FormControl isRequired>
-          <FormControl.Label>Last Name</FormControl.Label>
+          <FormControl.Label>Grade</FormControl.Label>
           <Input
-            type="text"
-            key="lastName"
+            key="grade"
             onChangeText={value =>
-              setFormData({...educationalInfoForm, lastName: value})
+              setFormData({...educationalInfoForm, grade: value})
             }
             fontSize="md"
           />
         </FormControl>
         <FormControl isRequired>
-          <FormControl.Label>Display Name</FormControl.Label>
-          <Input
-            key="displayName"
+          <FormControl.Label>Bio</FormControl.Label>
+          <TextArea
+            key="bio"
             onChangeText={value =>
-              setFormData({...educationalInfoForm, displayName: value})
-            }
-            fontSize="md"
-          />
-        </FormControl>
-        <FormControl isRequired>
-          <FormControl.Label>Email</FormControl.Label>
-          <Input
-            type="email"
-            key="email"
-            onChangeText={value =>
-              setFormData({...educationalInfoForm, email: value})
-            }
-            fontSize="md"
-          />
-        </FormControl>
-        <FormControl isRequired>
-          <FormControl.Label>Mobile</FormControl.Label>
-          <Input
-            type="telephone"
-            key="mobile"
-            onChangeText={value =>
-              setFormData({...educationalInfoForm, mobile: value})
-            }
-            fontSize="md"
-          />
-        </FormControl>
-        <FormControl isRequired>
-          <FormControl.Label>City</FormControl.Label>
-          <Input
-            type="text"
-            key="city"
-            onChangeText={value =>
-              setFormData({...educationalInfoForm, city: value})
+              setFormData({...educationalInfoForm, bio: value})
             }
             fontSize="md"
           />

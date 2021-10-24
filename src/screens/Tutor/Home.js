@@ -32,7 +32,6 @@ export default function Home() {
       <ScrollView>
         <VStack px="12" space={2} alignmentItems="center">
           <Course />
-          <Course />
         </VStack>
       </ScrollView>
       <VStack space={1} alignmentItems="left" mt={2} px="12">
