@@ -13,24 +13,19 @@ import {
 import CameraContainer from '../CameraContainer';
 
 export default function TakeSelfie() {
-  const [uploadPath, SetUploadPath] = useState(
-    require('../../assets/images/default.png'),
-  );
+  const [uploadPath, SetUploadPath] = useState('');
   const [showModal, SetShowModal] = useState(false);
 
-  useEffect(() => {
-    console.log('xxx', uploadPath);
-  }, [uploadPath]);
   const takeSelfie = selfie => {
+    SetUploadPath('');
     let source;
     if (Platform.OS === 'android') {
-      source = {uri: selfie.uri, isStatic: true};
+      source = {...selfie, uri: selfie.uri, isStatic: true};
     } else {
-      source = {uri: selfie.uri.replace('file://', ''), isStatic: true};
+      source = {...selfie, uri: selfie.uri.replace('file://', '')};
     }
-
-    SetUploadPath({uri: source.uri});
-    console.log('profile', uploadPath);
+    SetUploadPath(source);
+    SetShowModal(false);
   };
 
   const openCameraHandler = () => {
@@ -44,7 +39,7 @@ export default function TakeSelfie() {
         path: 'images',
       },
     };
-
+    SetUploadPath('');
     ImagePicker.launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
@@ -53,8 +48,11 @@ export default function TakeSelfie() {
       } else if (response.customButton) {
         console.log('User clicked custom button:' + response.customButton);
       } else {
-        const source = {uri: response.uri};
-        console.log('imageResponse', JSON.stringify(response));
+        const source = {
+          ...response.assets[0],
+          uri: response.assets[0].uri.replace('file://', ''),
+        };
+        console.log('imageResponse', source);
         SetUploadPath(source);
       }
     });

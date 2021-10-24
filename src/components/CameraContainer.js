@@ -6,6 +6,7 @@ export default function CameraContainer({capture}) {
   return (
     <RNCamera
       style={styles.preview}
+      captureAudio={false}
       type={RNCamera.Constants.Type.front}
       flashMode={RNCamera.Constants.FlashMode.on}
       androidCameraPermissionOptions={{

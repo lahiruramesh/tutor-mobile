@@ -39,6 +39,10 @@ export default function SignUpForm() {
     SetBasicForm(form);
   };
 
+  const submitEducationalBackground = form => {
+    console.log('form', form);
+  };
+
   useEffect(() => {}, []);
 
   return (
@@ -53,6 +57,7 @@ export default function SignUpForm() {
         step={step}
         selectedRole={selectedRole}
         submitBasicFormDetails={submitBasicFormDetails}
+        submitEducationalBackground={submitEducationalBackground}
       />
       <VStack space={3} mt="5">
         <HStack space={2}>

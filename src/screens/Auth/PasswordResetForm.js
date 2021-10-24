@@ -26,16 +26,16 @@ export default function PasswordResetForm() {
       mx="auto">
       <VStack space={3} mt="5">
         <FormControl>
-          <FormControl.Label>User Name</FormControl.Label>
+          <FormControl.Label>Old Password</FormControl.Label>
           <Input
-            type="text"
+            type="password"
             key="userName"
             //   onChangeText={setUserName}
             fontSize="md"
           />
         </FormControl>
         <FormControl>
-          <FormControl.Label>Password</FormControl.Label>
+          <FormControl.Label>New Password</FormControl.Label>
           <Input
             type="password"
             //     onChangeText={setPassword}
@@ -43,16 +43,6 @@ export default function PasswordResetForm() {
             key="password"
             fontSize="md"
           />
-          <TouchableItem>
-            <Link
-              _text={{fontSize: 'sm', fontWeight: '500', color: 'indigo.500'}}
-              alignSelf="flex-end"
-              mt="1"
-              //  onPress={onPressResetPasswordHandler}
-            >
-              Forget Password?
-            </Link>
-          </TouchableItem>
         </FormControl>
         <Button
           key="btSignIn"
@@ -60,25 +50,8 @@ export default function PasswordResetForm() {
           mt="2"
           colorScheme="indigo"
           _text={{color: 'white'}}>
-          Sign in
+          Reset
         </Button>
-        <HStack mt="6" justifyContent="center">
-          <Text fontSize="md" color="muted.700" fontWeight={400}>
-            I'm a new user.{' '}
-          </Text>
-          <TouchableItem>
-            <Link
-              _text={{
-                color: 'indigo.500',
-                fontWeight: 'medium',
-                fontSize: 'sm',
-              }}
-              // onPress={onPressSignUpHandler}
-            >
-              Sign Up
-            </Link>
-          </TouchableItem>
-        </HStack>
       </VStack>
     </Box>
   );

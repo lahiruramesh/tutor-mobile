@@ -6,17 +6,17 @@ export default function () {
   const students = [
     {
       id: '28694a0f-3da1-471f-bd96-142456e29d72',
-      fullName: 'Kiara',
-      timeStamp: '12:47 PM',
-      recentText: 'I will call today.',
+      fullName: 'Lahiru Ramesh',
+      timeStamp: '2021-05-10',
+      recentText: 'Matara',
       avatarUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU',
     },
     {
       id: '28694a0f-3da1-471f-bd96-142456e29d73',
-      fullName: 'Testing',
-      timeStamp: '12:47 PM',
-      recentText: 'I will call today.',
+      fullName: 'Sunil Perera',
+      timeStamp: '2021-10-20',
+      recentText: 'Kirulapone',
       avatarUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU',
     },

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Realm from 'realm';
 import {User} from '../../models/User';
 import {v4 as uuid} from 'uuid';
+import getRealmApp from '../../config/realm';
 
 export const ACTIONS = {
   SET_DATA: 'set_data',
@@ -59,6 +60,7 @@ export default function useAuthReducer() {
         token: 'TEST_TOKEN',
         role: username === 'Student' ? 'Student' : 'Tutor',
       };
+      getRealmApp();
       // const app = new Realm.App({
       //   id: 'tutor-wecja',
       //   app: {name: 'tutor', version: '0'},
